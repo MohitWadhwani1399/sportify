@@ -10,6 +10,11 @@ export default {
     return {
 
     }
+  },
+  created(){
+    this.$http.get('http://cricapi.com/api/cricket/').then(function(data){
+      console.log(data);
+    });
   }
 }
 </script>
