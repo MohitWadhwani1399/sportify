@@ -2,15 +2,15 @@
   <div id="footballInfo">
 
   <!--<img  alt="64x64" src="../logo.png"  style="width: 64px; height: 64px;">-->
-  <div class="container-fluid" v-for="article in articles">
-    <div class="row">
+  <div class="container-fluid" v-for="(article,index) in articles">
+    <div class="row" v-bind:id="index">
       <div class="col-md-2">
         <img v-bind:src="article.urlToImage" alt="football image" id="sportsImage">
       </div>
       <div class="col-md-10">
         <h3>{{article.title}}</h3>
-        <p v-show="!clicked" v-on:click="clicked=!clicked">{{article.description}}</p>
-        <p v-show="clicked" v-on:click="clicked=!clicked">{{article.content}}</p>
+        <p v-bind:id="'description'+index" v-show="indexes[index].show" v-on:click="describe(index)">{{article.description}}</p>
+        <p v-bind:id="'content'+index" v-show="!indexes[index].show" v-on:click="describe(index)">{{article.content}}</p>
       </div>
     </div>
   </div>
@@ -22,28 +22,43 @@
 export default {
   data () {
     return {
-        articles:[{title:"",description:"",url:"",urlToimage:"",content:""}],
-        clicked : false
+        articles:[],  
+        indexes:[],  
     }
   },
     methods:{
-        describe:function(){
-          //article.clicked=!article.clicked;
-          console.log(article);
-        }
+        describe:function(index){
+            //console.log(index);
+            if(this.indexes[index].show==true)
+            this.indexes[index].show=false;
+            else this.indexes[index].show=true;
+            //console.log(index);
+        } 
     },
-  created(){
-    this.$http.get('https://newsapi.org/v2/everything?q=football&apiKey=5363fa92757e4f8aa68ba122d7cd488e').then(function(data){
-      //var body=data.body;
-      var article=data.body.articles;
-       console.log(article);
-       //console.log(article[0].urlToImage);
-       this.articles=article;
-    });
-  }
+    created(){ 
+        this.$http.get('https://newsapi.org/v2/everything?q=football&apiKey=5363fa92757e4f8aa68ba122d7cd488e').then(function(data){
+            this.articles=data.body.articles;
+            console.log(this.articles);
+            
+            for(let i=0;i<(this.articles.length);i++){
+                    var obj={};
+                    obj["index"]=i;
+                    obj["show"]=true;
+                    this.indexes.push(obj);
+                }
+                //console.log(this.indexes);
+                //console.log(this.indexes.length);
+            });
+            
+            
+        },
+    
+    computed:{
+        
+    },
 }
 </script>
-<style>
+<style scoped>
 .row{
   border:solid;
   border-radius:7px;
@@ -52,8 +67,8 @@ export default {
 }
 
 #sportsImage {
-  width:154px;
-  height:104px;
+  width:134px;
+  height:114px;
   border-radius: 5px;
   margin-top:4px;
   margin-bottom:4px;
