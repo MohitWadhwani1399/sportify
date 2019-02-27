@@ -7,18 +7,14 @@
       <button v-on:click="displayMenu = !displayMenu">☰</button>
     </div>
     <ul class="nav-list" v-bind:class="{ active: displayMenu }">
-      <li class="nav-item current">
-        <router-link class to="/">Home</router-link>
-      </li>
+      <li class="nav-item current"><router-link class to="/">Home</router-link></li>
       <li class="nav-item"><router-link class to="/">Archives</router-link></li>
       <li class="nav-item"><router-link class to="/">Disabled</router-link></li>
-      <li class="nav-item">
-        <router-link class to="/aboutUs">About us</router-link>
-      </li>
+      <li class="nav-item"><router-link class to="/aboutUs">About us</router-link></li>
       <li class="nav-item">
         <form class>
-          <input class type="text" placeholder="Search" aria-label="Search" />
-          <button class type="submit">Search</button>
+          <input class="search" type="text" placeholder="Search" aria-label="Search" />
+          <button class="submit" type="submit">Search</button>
         </form>
       </li>
     </ul>
@@ -33,9 +29,22 @@ export default {
 }
 </script>
 <style scoped>
+.search {
+    border-radius: 3px;
+    height:25px;
+    width:115px;
+}
+.submit {
+    height:25px;
+    width:55px;
+}
+.nav-item {
+    border-radius: 3px;
+}
 .header {
   display: flex;
   height: 60px;
+  background-color: black;
 }
 .nav-list {
   flex: 1;
@@ -108,6 +117,9 @@ export default {
   align-items: center;
   background: deepskyblue;
   width: 20%;
+  margin-left: 15px;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 .active {
   display: flex;

@@ -36,7 +36,7 @@ export default {
         } 
     },
     created(){ 
-        this.$http.get('https://newsapi.org/v2/everything?q=football&apiKey=5363fa92757e4f8aa68ba122d7cd488e').then(function(data){
+        this.$http.get('https://newsapi.org/v2/top-headlines?sources=espn&apiKey=5363fa92757e4f8aa68ba122d7cd488e').then(function(data){
             this.articles=data.body.articles;
             console.log(this.articles);
             
@@ -63,8 +63,8 @@ export default {
 }
 
 #sportsImage {
-  width:134px;
-  height:114px;
+  width:120px;
+  height:100px;
   border-radius: 5px;
   margin-top:4px;
   margin-bottom:4px;

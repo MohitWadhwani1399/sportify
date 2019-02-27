@@ -36,7 +36,7 @@ export default {
         } 
     },
     created(){ 
-        this.$http.get('https://newsapi.org/v2/everything?q=esports&apiKey=5363fa92757e4f8aa68ba122d7cd488e').then(function(data){
+        this.$http.get('http://api.espn.com/v1').then(function(data){
             this.articles=data.body.articles;
             console.log(this.articles);
             

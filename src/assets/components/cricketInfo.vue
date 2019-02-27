@@ -5,7 +5,7 @@
   <div class="container-fluid" v-for="(article,index) in articles">
     <div class="row" v-bind:id="index">
       <div class="col-md-2">
-        <img v-bind:src="article.urlToImage" alt="football image" id="sportsImage">
+        <img v-bind:src="article.urlToImage" alt="cricket image" id="sportsImage">
       </div>
       <div class="col-md-10">
         <h3>{{article.title}}</h3>
